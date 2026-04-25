@@ -1,15 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { AppNavigator } from './src/navigation/AppNavigator';
 import { colors } from './src/theme/tokens';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <StatusBar style="light" />
       <AppNavigator />
-    </SafeAreaView>
+    </View>
   );
 }
 
