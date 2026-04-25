@@ -16,13 +16,14 @@ const styles = StyleSheet.create({
     marginBottom: spacing.md,
   },
   title: {
-    color: colors.textPrimary,
-    fontSize: typography.title,
-    fontWeight: '700',
+    color: colors.textWhite,
+    fontSize: typography.size.title,
+    fontWeight: typography.weight.bold,
   },
   tagline: {
     marginTop: spacing.xs,
-    color: colors.primary,
-    fontSize: typography.caption,
+    color: colors.textOffWhite,
+    fontSize: typography.size.caption,
+    fontWeight: typography.weight.medium,
   },
 });
