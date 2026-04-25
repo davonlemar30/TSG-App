@@ -2,11 +2,17 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { BrandHeader } from '../components/BrandHeader';
 import { mockBirthSnapshot } from '../data/mockChart';
-import { colors, spacing, typography } from '../theme/tokens';
+import { colors, layout, spacing, texture, typography } from '../theme/tokens';
 
 export function HomeScreen() {
   return (
     <View style={styles.screen}>
+      <View style={texture.layer}>
+        <View style={texture.glowTop} />
+        <View style={texture.glowBottom} />
+        <View style={texture.grain} />
+      </View>
+
       <BrandHeader />
       <Text style={styles.subtitle}>TheScorpioGang · TSG Birth Snapshot</Text>
       {mockBirthSnapshot.map((item) => (
@@ -22,31 +28,32 @@ export function HomeScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: colors.background,
-    padding: spacing.lg,
-    gap: spacing.sm,
+    backgroundColor: colors.backgroundBlack,
+    paddingHorizontal: layout.screenPaddingHorizontal,
+    paddingVertical: layout.screenPaddingVertical,
+    gap: layout.contentGap,
   },
   subtitle: {
-    color: colors.textSecondary,
-    fontSize: typography.body,
+    color: colors.textMutedGray,
+    fontSize: typography.size.body,
+    fontWeight: typography.weight.medium,
     marginBottom: spacing.md,
   },
   row: {
+    ...layout.card,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: spacing.md,
-    borderRadius: 12,
-    backgroundColor: colors.surface,
     marginBottom: spacing.sm,
   },
   label: {
-    color: colors.textPrimary,
-    fontSize: typography.body,
+    color: colors.textWhite,
+    fontSize: typography.size.body,
+    fontWeight: typography.weight.medium,
   },
   value: {
-    color: colors.accent,
-    fontSize: typography.body,
-    fontWeight: '700',
+    color: colors.accentRed,
+    fontSize: typography.size.subtitle,
+    fontWeight: typography.weight.bold,
   },
 });
