@@ -1,59 +1,46 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
-import { BrandHeader } from '../components/BrandHeader';
-import { mockBirthSnapshot } from '../data/mockChart';
-import { colors, layout, spacing, texture, typography } from '../theme/tokens';
+import { AppHeader } from '../components/AppHeader';
+import { MenuCard } from '../components/MenuCard';
+import { ScreenContainer } from '../components/ScreenContainer';
+import { SectionCard } from '../components/SectionCard';
+import { mockMenuItems } from '../data/mockChart';
+import { colors, typography } from '../theme/tokens';
+import { AppTabKey } from '../types';
 
-export function HomeScreen() {
+type HomeScreenProps = {
+  onNavigate: (tab: AppTabKey) => void;
+};
+
+export function HomeScreen({ onNavigate }: HomeScreenProps) {
   return (
-    <View style={styles.screen}>
-      <View style={texture.layer}>
-        <View style={texture.glowTop} />
-        <View style={texture.glowBottom} />
-        <View style={texture.grain} />
-      </View>
+    <ScreenContainer>
+      <AppHeader
+        title="TSG Birth Snapshot"
+        subtitle="Built for TheScorpioGang cosmic insights"
+        badgeText="v1"
+      />
 
-      <BrandHeader />
-      <Text style={styles.subtitle}>TheScorpioGang · TSG Birth Snapshot</Text>
-      {mockBirthSnapshot.map((item) => (
-        <View key={item.label} style={styles.row}>
-          <Text style={styles.label}>{item.label}</Text>
-          <Text style={styles.value}>{item.value}%</Text>
-        </View>
-      ))}
-    </View>
+      <SectionCard title="Explore">
+        {mockMenuItems.map((item) => (
+          <MenuCard
+            key={item.key}
+            title={item.title}
+            description={item.description}
+            onPress={() => onNavigate(item.key)}
+          />
+        ))}
+      </SectionCard>
+
+      <Text style={styles.caption}>Use the cards or tabs to move between sections.</Text>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: colors.backgroundBlack,
-    paddingHorizontal: layout.screenPaddingHorizontal,
-    paddingVertical: layout.screenPaddingVertical,
-    gap: layout.contentGap,
-  },
-  subtitle: {
+  caption: {
     color: colors.textMutedGray,
-    fontSize: typography.size.body,
+    fontSize: typography.size.caption,
     fontWeight: typography.weight.medium,
-    marginBottom: spacing.md,
-  },
-  row: {
-    ...layout.card,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: spacing.sm,
-  },
-  label: {
-    color: colors.textWhite,
-    fontSize: typography.size.body,
-    fontWeight: typography.weight.medium,
-  },
-  value: {
-    color: colors.accentRed,
-    fontSize: typography.size.subtitle,
-    fontWeight: typography.weight.bold,
   },
 });
